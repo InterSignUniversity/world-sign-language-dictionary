@@ -5,61 +5,63 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sign Language Video Dictionary</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; }
-        #searchBar { width: 80%; padding: 10px; margin: 20px auto; display: block; font-size: 16px; }
-        .video-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 20px; }
-        .video-item { text-align: center; }
-        .video-item img { width: 50px; cursor: pointer; }
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            margin-top: 20px;
+        }
+        .search-box {
+            width: 60%;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        .video-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+        .video-item {
+            width: 250px;
+            background: white;
+            padding: 10px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        iframe {
+            width: 100%;
+            height: 150px;
+            border-radius: 5px;
+        }
+        .flag {
+            width: 40px;
+            height: auto;
+            margin-top: 10px;
+        }
+        .country-name {
+            font-weight: bold;
+            margin-top: 5px;
+        }
     </style>
 </head>
 <body>
+
     <h1>Sign Language Video Dictionary</h1>
-    <input type="text" id="searchBar" placeholder="Search for a sign...">
-    
-    <div id="videoList" class="video-container"></div>
-    
+    <input type="text" class="search-box" placeholder="Search for a sign..." id="searchInput">
+
+    <div class="video-grid" id="videoContainer">
+        <!-- Videos & flags will be inserted here -->
+    </div>
+
     <script>
         const videos = [
-            { term: "Emotions", synonyms: ["Feelings"], country: "Argentina", flag: "🇦🇷", url: "https://www.youtube.com/watch?v=dJvLqFMAvqc" },
-            { term: "Emotions", synonyms: ["Feelings"], country: "Belgium", flag: "🇧🇪", url: "https://www.youtube.com/watch?v=EMwWZBZjTrs" },
-            { term: "Emotions", synonyms: ["Feelings"], country: "France", flag: "🇫🇷", url: "https://www.youtube.com/watch?v=-8Va78-egkA" },
-            { term: "Emotions", synonyms: ["Feelings"], country: "Germany", flag: "🇩🇪", url: "https://www.youtube.com/watch?v=x5goj9fBHNs" },
-            { term: "Emotions", synonyms: ["Feelings"], country: "Japan", flag: "🇯🇵", url: "https://youtu.be/1CU5gcATdnI" },
-            { term: "Emotions", synonyms: ["Feelings"], country: "Kenya", flag: "🇰🇪", url: "https://www.youtube.com/watch?v=fa4gbnIo14g" },
-            { term: "Emotions", synonyms: ["Feelings"], country: "Mexico", flag: "🇲🇽", url: "https://youtu.be/Q-KK2PTNWv4" },
-            { term: "Emotions", synonyms: ["Feelings"], country: "Slovenia", flag: "🇸🇮", url: "https://youtu.be/-Seocjxt9rs" },
-            { term: "Emotions", synonyms: ["Feelings"], country: "South Sudan", flag: "🇸🇸", url: "https://www.youtube.com/watch?v=MsCCWGBNvOE" },
-            { term: "Emotions", synonyms: ["Feelings"], country: "Turkey", flag: "🇹🇷", url: "https://www.youtube.com/watch?v=v4nnu4rEMkg" },
-            { term: "Emotions", synonyms: ["Feelings"], country: "Uganda", flag: "🇺🇬", url: "https://intersign-university.thinkific.com/manage/videos/10811527/edit" }
-        ];
-        
-        function displayVideos(query) {
-            const videoList = document.getElementById("videoList");
-            videoList.innerHTML = "";
-            
-            const filteredVideos = videos.filter(video => 
-                video.term.toLowerCase().includes(query) ||
-                video.synonyms.some(syn => syn.toLowerCase().includes(query))
-            );
-            
-            filteredVideos.forEach(video => {
-                const videoItem = document.createElement("div");
-                videoItem.classList.add("video-item");
-                videoItem.innerHTML = `
-                    <p>${video.flag} ${video.country}</p>
-                    <a href="${video.url}" target="_blank">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/3/3f/Placeholder_view_vector.svg" alt="${video.country} Video">
-                    </a>
-                `;
-                videoList.appendChild(videoItem);
-            });
-        }
-        
-        document.getElementById("searchBar").addEventListener("input", function() {
-            displayVideos(this.value.toLowerCase());
-        });
-        
-        displayVideos(""); // Display all videos by default
-    </script>
-</body>
-</html>
+            { country: "Argentina", code: "AR", url: "https://www.youtube.com/embed/dJvLqFMAvqc", flag: "https://flagcdn.com/w40/ar.png" },
+            { country: "Belgium", code: "BE", url: "https://www.youtube.com/embed/EMwWZBZjTrs", flag: "https://flagcdn.com/w40/be.png" },
+            { country: "France", code: "FR", url: "https://www.youtube.com/embed/-8Va78-egkA", flag: "https://flagcdn.com/w40/fr.png" },
+            { country: "Germany", code: "DE", url: "https://www.youtube.com/embed/x5goj9fBHNs", flag: "https://flagcdn.com/w40/de.png" },
+            { country: "Japan", code: "JP", url: "https://www.youtube.com/embed/1CU5gcATdnI", flag: "https://flagcdn.com/w40/jp.png" },
+            { country: "Kenya", code: "KE", url: "https://www.youtu
