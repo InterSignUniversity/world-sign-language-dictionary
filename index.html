@@ -7,10 +7,9 @@
     <style>
         body { font-family: Arial, sans-serif; text-align: center; }
         .container { display: flex; flex-wrap: wrap; justify-content: center; }
-        .card { width: 250px; margin: 10px; padding: 10px; border-radius: 10px; background: #fff; box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); }
-        iframe { width: 100%; height: 140px; border-radius: 10px; }
-        img { width: 40px; height: 25px; margin-top: 5px; }
-        input { width: 80%; padding: 8px; margin: 10px 0; }
+        .card { border: 1px solid #ddd; border-radius: 10px; padding: 10px; margin: 10px; width: 300px; box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.1); }
+        iframe { width: 100%; height: 200px; border-radius: 10px; }
+        img { width: 30px; height: auto; display: block; margin: 5px auto; }
     </style>
 </head>
 <body>
@@ -18,43 +17,43 @@
     <input type="text" id="search" placeholder="Search for a sign..." onkeyup="filterVideos()">
     <div class="container" id="videoContainer">
         <div class="card" data-keywords="emotions mood feelings">
-            <iframe src="https://www.youtube.com/embed/dJvLqFMAvqc?modestbranding=1&rel=0&showinfo=0&controls=1" allowfullscreen></iframe>
-            <img src="https://flagcdn.com/w40/ar.png" alt="Argentina">
+            <iframe src="https://www.youtube.com/embed/dJvLqFMAvqc?modestbranding=1&showinfo=0&rel=0&iv_load_policy=3" allowfullscreen></iframe>
+            <img src="https://flagcdn.com/w40/ar.png" alt="Argentina Flag">
             <p>Argentina</p>
         </div>
         <div class="card" data-keywords="emotions mood feelings">
-            <iframe src="https://www.youtube.com/embed/EMwWZBZjTrs?modestbranding=1&rel=0&showinfo=0&controls=1" allowfullscreen></iframe>
-            <img src="https://flagcdn.com/w40/be.png" alt="Belgium">
+            <iframe src="https://www.youtube.com/embed/EMwWZBZjTrs?modestbranding=1&showinfo=0&rel=0&iv_load_policy=3" allowfullscreen></iframe>
+            <img src="https://flagcdn.com/w40/be.png" alt="Belgium Flag">
             <p>Belgium</p>
         </div>
         <div class="card" data-keywords="emotions mood feelings">
-            <iframe src="https://www.youtube.com/embed/x5goj9fBHNs?modestbranding=1&rel=0&showinfo=0&controls=1" allowfullscreen></iframe>
-            <img src="https://flagcdn.com/w40/de.png" alt="Germany">
+            <iframe src="https://www.youtube.com/embed/x5goj9fBHNs?modestbranding=1&showinfo=0&rel=0&iv_load_policy=3" allowfullscreen></iframe>
+            <img src="https://flagcdn.com/w40/de.png" alt="Germany Flag">
             <p>Germany</p>
         </div>
         <div class="card" data-keywords="emotions mood feelings">
-            <iframe src="https://www.youtube.com/embed/MsCCWGBNvOE?modestbranding=1&rel=0&showinfo=0&controls=1" allowfullscreen></iframe>
-            <img src="https://flagcdn.com/w40/ss.png" alt="South Sudan">
+            <iframe src="https://www.youtube.com/embed/MsCCWGBNvOE?modestbranding=1&showinfo=0&rel=0&iv_load_policy=3" allowfullscreen></iframe>
+            <img src="https://flagcdn.com/w40/ss.png" alt="South Sudan Flag">
             <p>South Sudan</p>
         </div>
         <div class="card" data-keywords="emotions mood feelings">
-            <iframe src="https://www.youtube.com/embed/2z3ODeq4AoM?modestbranding=1&rel=0&showinfo=0&controls=1" allowfullscreen></iframe>
-            <img src="https://flagcdn.com/w40/ug.png" alt="Uganda">
+            <iframe src="https://www.youtube.com/embed/2z3ODeq4AoM?modestbranding=1&showinfo=0&rel=0&iv_load_policy=3" allowfullscreen></iframe>
+            <img src="https://flagcdn.com/w40/ug.png" alt="Uganda Flag">
             <p>Uganda</p>
         </div>
     </div>
     <script>
         function filterVideos() {
-            let input = document.getElementById('search').value.toLowerCase();
-            let cards = document.querySelectorAll('.card');
-            cards.forEach(card => {
-                let keywords = card.getAttribute('data-keywords');
+            let input = document.getElementById("search").value.toLowerCase();
+            let cards = document.getElementsByClassName("card");
+            for (let card of cards) {
+                let keywords = card.getAttribute("data-keywords");
                 if (keywords.includes(input)) {
                     card.style.display = "block";
                 } else {
                     card.style.display = "none";
                 }
-            });
+            }
         }
     </script>
 </body>
