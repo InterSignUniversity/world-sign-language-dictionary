@@ -64,4 +64,39 @@
             { country: "France", code: "FR", url: "https://www.youtube.com/embed/-8Va78-egkA", flag: "https://flagcdn.com/w40/fr.png" },
             { country: "Germany", code: "DE", url: "https://www.youtube.com/embed/x5goj9fBHNs", flag: "https://flagcdn.com/w40/de.png" },
             { country: "Japan", code: "JP", url: "https://www.youtube.com/embed/1CU5gcATdnI", flag: "https://flagcdn.com/w40/jp.png" },
-            { country: "Kenya", code: "KE", url: "https://www.youtu
+            { country: "Kenya", code: "KE", url: "https://www.youtube.com/embed/fa4gbnIo14g", flag: "https://flagcdn.com/w40/ke.png" },
+            { country: "Mexico", code: "MX", url: "https://www.youtube.com/embed/Q-KK2PTNWv4", flag: "https://flagcdn.com/w40/mx.png" },
+            { country: "Slovenia", code: "SI", url: "https://www.youtube.com/embed/-Seocjxt9rs", flag: "https://flagcdn.com/w40/si.png" },
+            { country: "South Sudan", code: "SS", url: "https://www.youtube.com/embed/MsCCWGBNvOE", flag: "https://flagcdn.com/w40/ss.png" },
+            { country: "Turkey", code: "TR", url: "https://www.youtube.com/embed/v4nnu4rEMkg", flag: "https://flagcdn.com/w40/tr.png" },
+            { country: "Uganda", code: "UG", url: "https://intersign-university.thinkific.com/manage/videos/10811527/edit", flag: "https://flagcdn.com/w40/ug.png" }
+        ];
+
+        function displayVideos(filter = "") {
+            const container = document.getElementById("videoContainer");
+            container.innerHTML = "";
+            videos
+                .filter(video => video.country.toLowerCase().includes(filter.toLowerCase()))
+                .forEach(video => {
+                    const videoElement = document.createElement("div");
+                    videoElement.className = "video-item";
+                    videoElement.innerHTML = `
+                        <iframe src="${video.url}" allowfullscreen></iframe>
+                        <div>
+                            <img class="flag" src="${video.flag}" alt="${video.country} flag">
+                            <p class="country-name">${video.country}</p>
+                        </div>
+                    `;
+                    container.appendChild(videoElement);
+                });
+        }
+
+        document.getElementById("searchInput").addEventListener("input", function() {
+            displayVideos(this.value);
+        });
+
+        displayVideos(); // Load videos on page load
+    </script>
+
+</body>
+</html>
