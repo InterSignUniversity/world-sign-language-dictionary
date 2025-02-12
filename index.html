@@ -8,99 +8,63 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            background-color: #f4f4f4;
         }
-        h1 {
-            margin-top: 20px;
-        }
-        .search-box {
-            width: 60%;
-            padding: 10px;
-            font-size: 16px;
-            margin-bottom: 20px;
-        }
-        .video-grid {
+        .container {
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
-            gap: 20px;
         }
-        .video-item {
-            width: 250px;
-            background: white;
+        .card {
+            width: 300px;
+            margin: 15px;
             padding: 10px;
+            border: 1px solid #ccc;
             border-radius: 10px;
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 2px 2px 10px rgba(0,0,0,0.1);
+            text-align: center;
         }
         iframe {
             width: 100%;
-            height: 150px;
-            border-radius: 5px;
+            height: 200px;
             border: none;
         }
-        .flag {
-            width: 40px;
+        img.flag {
+            width: 30px;
             height: auto;
             margin-top: 10px;
-        }
-        .country-name {
-            font-weight: bold;
-            margin-top: 5px;
         }
     </style>
 </head>
 <body>
-
     <h1>Sign Language Video Dictionary</h1>
-    <input type="text" class="search-box" placeholder="Search for a sign..." id="searchInput">
-
-    <div class="video-grid" id="videoContainer">
-        <!-- Videos & flags will be inserted here -->
+    <input type="text" id="search" placeholder="Search for a sign...">
+    <div class="container" id="videoContainer">
+        <div class="card" data-keywords="emotions mood feelings">
+            <iframe src="https://www.youtube.com/embed/dJvLqFMAvqc?autoplay=0&modestbranding=1&rel=0&showinfo=0&controls=0&disablekb=1&fs=0" allowfullscreen></iframe>
+            <img src="flags/argentina.png" class="flag" alt="Argentina Flag">
+            <p>Argentina</p>
+        </div>
+        <div class="card" data-keywords="emotions mood feelings">
+            <iframe src="https://www.youtube.com/embed/EXAMPLE2?autoplay=0&modestbranding=1&rel=0&showinfo=0&controls=0&disablekb=1&fs=0" allowfullscreen></iframe>
+            <img src="flags/belgium.png" class="flag" alt="Belgium Flag">
+            <p>Belgium</p>
+        </div>
+        <!-- Add more videos following this structure -->
     </div>
 
     <script>
-        const videos = [
-            { country: "Argentina", code: "AR", url: "https://www.youtube.com/embed/dJvLqFMAvqc?rel=0&modestbranding=1&showinfo=0&controls=0&disablekb=1", flag: "https://flagcdn.com/w40/ar.png", keywords: ["emotions", "feelings", "mood"] },
-            { country: "Belgium", code: "BE", url: "https://www.youtube.com/embed/EMwWZBZjTrs?rel=0&modestbranding=1&showinfo=0&controls=0&disablekb=1", flag: "https://flagcdn.com/w40/be.png", keywords: ["emotions", "mood"] },
-            { country: "France", code: "FR", url: "https://www.youtube.com/embed/-8Va78-egkA?rel=0&modestbranding=1&showinfo=0&controls=0&disablekb=1", flag: "https://flagcdn.com/w40/fr.png", keywords: ["feelings", "emotion"] },
-            { country: "Germany", code: "DE", url: "https://www.youtube.com/embed/x5goj9fBHNs?rel=0&modestbranding=1&showinfo=0&controls=0&disablekb=1", flag: "https://flagcdn.com/w40/de.png", keywords: ["mood", "feelings"] },
-            { country: "Japan", code: "JP", url: "https://www.youtube.com/embed/1CU5gcATdnI?rel=0&modestbranding=1&showinfo=0&controls=0&disablekb=1", flag: "https://flagcdn.com/w40/jp.png", keywords: ["emotion", "mood"] },
-            { country: "Kenya", code: "KE", url: "https://www.youtube.com/embed/fa4gbnIo14g?rel=0&modestbranding=1&showinfo=0&controls=0&disablekb=1", flag: "https://flagcdn.com/w40/ke.png", keywords: ["feelings", "emotions"] },
-            { country: "Mexico", code: "MX", url: "https://www.youtube.com/embed/Q-KK2PTNWv4?rel=0&modestbranding=1&showinfo=0&controls=0&disablekb=1", flag: "https://flagcdn.com/w40/mx.png", keywords: ["emotions", "mood"] },
-            { country: "Slovenia", code: "SI", url: "https://www.youtube.com/embed/-Seocjxt9rs?rel=0&modestbranding=1&showinfo=0&controls=0&disablekb=1", flag: "https://flagcdn.com/w40/si.png", keywords: ["feelings", "emotion"] },
-            { country: "South Sudan", code: "SS", url: "https://www.youtube.com/embed/MsCCWGBNvOE?rel=0&modestbranding=1&showinfo=0&controls=0&disablekb=1", flag: "https://flagcdn.com/w40/ss.png", keywords: ["mood", "emotions"] },
-            { country: "Turkey", code: "TR", url: "https://www.youtube.com/embed/v4nnu4rEMkg?rel=0&modestbranding=1&showinfo=0&controls=0&disablekb=1", flag: "https://flagcdn.com/w40/tr.png", keywords: ["feelings", "emotion"] },
-            { country: "Uganda", code: "UG", url: "https://intersign-university.thinkific.com/manage/videos/10811527/edit", flag: "https://flagcdn.com/w40/ug.png", keywords: ["emotions", "mood", "feelings"] }
-        ];
-
-        function displayVideos(filter = "") {
-            const container = document.getElementById("videoContainer");
-            container.innerHTML = "";
-            videos
-                .filter(video => 
-                    video.country.toLowerCase().includes(filter.toLowerCase()) ||
-                    video.keywords.some(keyword => keyword.includes(filter.toLowerCase()))
-                )
-                .forEach(video => {
-                    const videoElement = document.createElement("div");
-                    videoElement.className = "video-item";
-                    videoElement.innerHTML = `
-                        <iframe src="${video.url}" allowfullscreen></iframe>
-                        <div>
-                            <img class="flag" src="${video.flag}" alt="${video.country} flag">
-                            <p class="country-name">${video.country}</p>
-                        </div>
-                    `;
-                    container.appendChild(videoElement);
-                });
-        }
-
-        document.getElementById("searchInput").addEventListener("input", function() {
-            displayVideos(this.value);
+        document.getElementById("search").addEventListener("input", function() {
+            let filter = this.value.toLowerCase();
+            let cards = document.querySelectorAll(".card");
+            cards.forEach(card => {
+                let keywords = card.getAttribute("data-keywords");
+                if (keywords.includes(filter) || filter === "") {
+                    card.style.display = "block";
+                } else {
+                    card.style.display = "none";
+                }
+            });
         });
-
-        displayVideos(); // Load videos on page load
     </script>
-
 </body>
 </html>
