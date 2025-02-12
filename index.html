@@ -36,6 +36,7 @@
             width: 100%;
             height: 150px;
             border-radius: 5px;
+            border: none;
         }
         .flag {
             width: 40px;
@@ -59,24 +60,27 @@
 
     <script>
         const videos = [
-            { country: "Argentina", code: "AR", url: "https://www.youtube.com/embed/dJvLqFMAvqc", flag: "https://flagcdn.com/w40/ar.png" },
-            { country: "Belgium", code: "BE", url: "https://www.youtube.com/embed/EMwWZBZjTrs", flag: "https://flagcdn.com/w40/be.png" },
-            { country: "France", code: "FR", url: "https://www.youtube.com/embed/-8Va78-egkA", flag: "https://flagcdn.com/w40/fr.png" },
-            { country: "Germany", code: "DE", url: "https://www.youtube.com/embed/x5goj9fBHNs", flag: "https://flagcdn.com/w40/de.png" },
-            { country: "Japan", code: "JP", url: "https://www.youtube.com/embed/1CU5gcATdnI", flag: "https://flagcdn.com/w40/jp.png" },
-            { country: "Kenya", code: "KE", url: "https://www.youtube.com/embed/fa4gbnIo14g", flag: "https://flagcdn.com/w40/ke.png" },
-            { country: "Mexico", code: "MX", url: "https://www.youtube.com/embed/Q-KK2PTNWv4", flag: "https://flagcdn.com/w40/mx.png" },
-            { country: "Slovenia", code: "SI", url: "https://www.youtube.com/embed/-Seocjxt9rs", flag: "https://flagcdn.com/w40/si.png" },
-            { country: "South Sudan", code: "SS", url: "https://www.youtube.com/embed/MsCCWGBNvOE", flag: "https://flagcdn.com/w40/ss.png" },
-            { country: "Turkey", code: "TR", url: "https://www.youtube.com/embed/v4nnu4rEMkg", flag: "https://flagcdn.com/w40/tr.png" },
-            { country: "Uganda", code: "UG", url: "https://intersign-university.thinkific.com/manage/videos/10811527/edit", flag: "https://flagcdn.com/w40/ug.png" }
+            { country: "Argentina", code: "AR", url: "https://www.youtube.com/embed/dJvLqFMAvqc?rel=0&showinfo=0&modestbranding=1", flag: "https://flagcdn.com/w40/ar.png", keywords: ["emotions", "feelings", "mood"] },
+            { country: "Belgium", code: "BE", url: "https://www.youtube.com/embed/EMwWZBZjTrs?rel=0&showinfo=0&modestbranding=1", flag: "https://flagcdn.com/w40/be.png", keywords: ["emotions", "mood"] },
+            { country: "France", code: "FR", url: "https://www.youtube.com/embed/-8Va78-egkA?rel=0&showinfo=0&modestbranding=1", flag: "https://flagcdn.com/w40/fr.png", keywords: ["feelings", "emotion"] },
+            { country: "Germany", code: "DE", url: "https://www.youtube.com/embed/x5goj9fBHNs?rel=0&showinfo=0&modestbranding=1", flag: "https://flagcdn.com/w40/de.png", keywords: ["mood", "feelings"] },
+            { country: "Japan", code: "JP", url: "https://www.youtube.com/embed/1CU5gcATdnI?rel=0&showinfo=0&modestbranding=1", flag: "https://flagcdn.com/w40/jp.png", keywords: ["emotion", "mood"] },
+            { country: "Kenya", code: "KE", url: "https://www.youtube.com/embed/fa4gbnIo14g?rel=0&showinfo=0&modestbranding=1", flag: "https://flagcdn.com/w40/ke.png", keywords: ["feelings", "emotions"] },
+            { country: "Mexico", code: "MX", url: "https://www.youtube.com/embed/Q-KK2PTNWv4?rel=0&showinfo=0&modestbranding=1", flag: "https://flagcdn.com/w40/mx.png", keywords: ["emotions", "mood"] },
+            { country: "Slovenia", code: "SI", url: "https://www.youtube.com/embed/-Seocjxt9rs?rel=0&showinfo=0&modestbranding=1", flag: "https://flagcdn.com/w40/si.png", keywords: ["feelings", "emotion"] },
+            { country: "South Sudan", code: "SS", url: "https://www.youtube.com/embed/MsCCWGBNvOE?rel=0&showinfo=0&modestbranding=1", flag: "https://flagcdn.com/w40/ss.png", keywords: ["mood", "emotions"] },
+            { country: "Turkey", code: "TR", url: "https://www.youtube.com/embed/v4nnu4rEMkg?rel=0&showinfo=0&modestbranding=1", flag: "https://flagcdn.com/w40/tr.png", keywords: ["feelings", "emotion"] },
+            { country: "Uganda", code: "UG", url: "https://intersign-university.thinkific.com/manage/videos/10811527/edit", flag: "https://flagcdn.com/w40/ug.png", keywords: ["emotions", "mood", "feelings"] }
         ];
 
         function displayVideos(filter = "") {
             const container = document.getElementById("videoContainer");
             container.innerHTML = "";
             videos
-                .filter(video => video.country.toLowerCase().includes(filter.toLowerCase()))
+                .filter(video => 
+                    video.country.toLowerCase().includes(filter.toLowerCase()) ||
+                    video.keywords.some(keyword => keyword.includes(filter.toLowerCase()))
+                )
                 .forEach(video => {
                     const videoElement = document.createElement("div");
                     videoElement.className = "video-item";
